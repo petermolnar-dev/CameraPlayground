@@ -16,7 +16,7 @@ struct CameraInfo: Identifiable, CustomStringConvertible {
     let dimensions: (width: Int, height: Int)?
     
     var description: String {
-        var basicInfo = "\(localisedName)\n\(id)\n"
+        var basicInfo = "\(localisedName)\n\(id)"
         if let mediaSubType {
             basicInfo += "\nActive Format Media Subtype: \(mediaSubType.description)"
         }

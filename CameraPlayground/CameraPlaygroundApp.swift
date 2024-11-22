@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct CameraPlaygroundApp: App {
+    let info = CameraInfoProvider()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(
+                deviceName: "Device: \(info.getDeviceName())",
+                cameras: info.getCameraListing(),
+                pixelFormats: info.getavailablePixelFormats())
         }
     }
 }

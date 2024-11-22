@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    let info = CameraInfoProvider()
+    private let deviceText: String
+    private let cameras: [CameraInfo]
+    private let pixelFormats: [String]
+    private let pixelFormatTitle = "Available Pixel formats:"
+
+    init(deviceName: String, cameras: [CameraInfo], pixelFormats: [String]) {
+        self.deviceText = deviceName
+        self.cameras = cameras
+        self.pixelFormats = pixelFormats
+    }
     
     var body: some View {
-        let deviceText = "Device: \(info.getDeviceName())"
-        let cameras = info.getCameraListing()
-        let pixelFormatTitle = "Available Pixel formats:"
-        let pixelFormats = info.getavailablePixelFormats()
         VStack {
             Text(deviceText)
             Text("Detected cameras:")
@@ -26,21 +31,33 @@ struct ContentView: View {
                 Text(format)
             }
             Button("Print report to console") {
-                print("Report")
-                print(deviceText)
-                cameras.forEach {
-                    print($0.description)
-                }
-                print(pixelFormatTitle)
-                pixelFormats.forEach { format in
-                    print(format)
-                }
+                makeConsoleReport()
             }
         }
         .padding()
     }
+    
+    private func makeConsoleReport() {
+        print("Report")
+        divider()
+        print(deviceText)
+        cameras.forEach {
+            divider()
+            print($0.description)
+        }
+        divider()
+        print(pixelFormatTitle)
+        pixelFormats.forEach { format in
+            print(format)
+        }
+        
+        func divider() {
+            print("-------------------------")
+        }
+    }
+    
 }
 
 #Preview {
-    ContentView()
+    ContentView(deviceName: "A Device", cameras: [], pixelFormats: [])
 }

@@ -61,6 +61,7 @@ struct CameraInfoProvider {
     }
 }
 
+// Credit: https://gist.github.com/patrickjuchli/d1b07f97e0ea1da5db09
 extension FourCharCode {
     public var string: String? {
         let cString: [CChar] = [
